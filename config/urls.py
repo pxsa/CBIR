@@ -31,5 +31,6 @@ urlpatterns = [
     path('model/', views.arrange_model, name='arrange_model'),
     path('start-process/', views.start_process, name='start_process'),
     path('get-progress/', views.get_progress, name='get_progress'),
+    path('docs/', views.docs, name='docs'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

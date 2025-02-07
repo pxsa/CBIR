@@ -72,9 +72,6 @@ def arrange_model(request):
 	return render(request, 'vision/arrange_model.html')
 
 
-
-
-
 def start_process(request):
     # # Simulate a long-running process
     # for i in range(1, 101):
@@ -91,3 +88,7 @@ def start_process(request):
 def get_progress(request):
     progress = request.session.get('progress', 0)
     return JsonResponse({'progress': progress})
+
+
+def docs(request):
+	return render(request, 'docs.html')

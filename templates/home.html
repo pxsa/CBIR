@@ -9,7 +9,8 @@
 
 
 {% block content %}
-	<div class="m-5">
+<div class="container">
+	<div class="my-4">
 		<div class="row">
 		  <div class="col-sm-6 mb-3 mb-sm-0">
 			<div class="card shadow rounded border-0 p-5">
@@ -26,7 +27,25 @@
 		        </form>
 		      </div>
 		    </div>
+
+			<div class="my-3">
+				<div class="card shadow border-0 myfont" dir="rtl">
+					<div class="row g-0">
+						<div class="col-md-12 p-3">
+							<strong class="d-inline-block mb-2 text-success myfont">فهرست</strong>
+							<ul>
+								<li><a href="{% url 'upload' %}">آپلود</a></li>
+								<li><a href="{% url 'feedback' %}">بازخورد</a></li>
+								<li><a href="{% url 'docs' %}">راهنما</a></li>
+							</ul>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+
 		  </div>
+
 
   		  <div class="col-sm-6 mb-3 mb-sm-0">
 			<form method="POST" action="{% url 'feedback' %}">
@@ -55,4 +74,6 @@
 		  </div>
 		</div>
 	</div>
+</div>
+
 {% endblock %}

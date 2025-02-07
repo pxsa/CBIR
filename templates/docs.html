@@ -1,0 +1,56 @@
+{% extends '_base.html' %}
+
+{% block title %}
+    docs
+{% endblock %}
+
+
+{% block content %}
+<div class="container my-4 myfont" dir="rtl">
+    <!-- Featured Post -->
+
+    <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+        <div class="col-md-8 px-0">
+          <p class="display-4 font-italic text-danger ebsf">بازیابی تصویر مبتنی بر محتوا</p>
+          <p class="my-3 myfont2 bsf">بازیابی تصویر مبتنی بر محتوا (Content-Based Image Retrieval یا CBIR) یک تکنیک برای جستجوی تصاویر در پایگاه داده است که به جای استفاده از فراداده‌ها (مانند برچسب‌ها یا توضیحات)، از ویژگی‌های تصویری مانند رنگ، بافت، شکل و ویژگی‌های فضایی استفاده می‌کند.</p>
+        </div>
+    </div>
+
+    <!-- Two Smaller Posts -->
+    <div class="row mt-3">
+        <!-- First Post -->
+        <div class="col-md-8 mb-4">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-11 p-3">
+                        <strong class="d-inline-block mb-2 text-primary">World</strong>
+                        <p class="my-3 myfont2 bsf">بازیابی تصویر مبتنی بر محتوا (Content-Based Image Retrieval یا CBIR) یک تکنیک برای جستجوی تصاویر در پایگاه داده است که به جای استفاده از فراداده‌ها (مانند برچسب‌ها یا توضیحات)، از ویژگی‌های تصویری مانند رنگ، بافت، شکل و ویژگی‌های فضایی استفاده می‌کند.</p>
+                        <p class="my-3 myfont2 bsf">بازیابی تصویر مبتنی بر محتوا (Content-Based Image Retrieval یا CBIR) یک تکنیک برای جستجوی تصاویر در پایگاه داده است که به جای استفاده از فراداده‌ها (مانند برچسب‌ها یا توضیحات)، از ویژگی‌های تصویری مانند رنگ، بافت، شکل و ویژگی‌های فضایی استفاده می‌کند.</p>
+                        <p class="my-3 myfont2 bsf">بازیابی تصویر مبتنی بر محتوا (Content-Based Image Retrieval یا CBIR) یک تکنیک برای جستجوی تصاویر در پایگاه داده است که به جای استفاده از فراداده‌ها (مانند برچسب‌ها یا توضیحات)، از ویژگی‌های تصویری مانند رنگ، بافت، شکل و ویژگی‌های فضایی استفاده می‌کند.</p>
+
+                        <a href="#">Continue reading</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Post -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-12 p-3">
+                        <strong class="d-inline-block mb-2 text-success myfont">فهرست</strong>
+                        <ul>
+                            <li><a href="{% url 'upload' %}">آپلود</a></li>
+                            <li><a href="{% url 'feedback' %}">بازخورد</a></li>
+                            <li><a href="{% url 'docs' %}">راهنما</a></li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

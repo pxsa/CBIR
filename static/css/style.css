@@ -8,12 +8,48 @@
     src: url('../fonts/Ordibehesht.TTF') format(truetype);
 }
 
+@font-face {
+    font-family: 'Kodak';
+    src: url('../fonts/B\ Koodak\ Bold_0.ttf') format(truetype);
+}
+
+@font-face {
+    font-family: 'Nazanin';
+    src: url('../fonts/B-NAZANIN.TTF') format(truetype);
+}
+
 .myfont {
     font-family: 'Jomhuri', sans-serif !important;
     font-size: xx-large;
+    line-height: 1;
 }
 
 .myfont2 {
     font-family: 'Ordibehesht', sans-serif !important;
     font-size: large;
+    line-height: 1;
+}
+
+.kodak-font {
+    font-family: 'Kodak', sans-serif !important;
+    font-size: large;
+    line-height: 1;
+}
+
+.nazanin-font {
+    font-family: 'Nazanin', sans-serif !important;
+    font-size: large;
+    line-height: 1;
+}
+
+.bsf {
+    font-size: 36px;
+}
+
+.ebsf {
+    font-size: 65px;
+}
+
+.nsf {
+    font-size: 28px;
 }
