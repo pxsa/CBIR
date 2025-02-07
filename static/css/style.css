@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'Jomhuri';
+    src: url("../fonts/Jomhuri.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: 'Ordibehesht';
+    src: url('../fonts/Ordibehesht.TTF') format(truetype);
+}
+
+.myfont {
+    font-family: 'Jomhuri', sans-serif !important;
+    font-size: xx-large;
+}
+
+.myfont2 {
+    font-family: 'Ordibehesht', sans-serif !important;
+    font-size: large;
+}
