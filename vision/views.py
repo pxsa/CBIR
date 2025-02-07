@@ -20,11 +20,20 @@ def upload_image(request):
 		form = ImageUploadForm(request.POST, request.FILES)
 		if form.is_valid():
 			uploaded_image = form.save()
-			# process !!!
-			result = image_process(uploaded_image.image)
+
+			# PROCESS !!!
+
+			# Custom Model
+			# matched_images = image_process(uploaded_image.image)
+
+			# VGG Model
+			vgg = VGGModel()
+			matched_images, scores = vgg.image_process(uploaded_image.image)
+
 			return render(request, 'home.html', context={
 					'uploaded_image': uploaded_image.image,
-					'matched_images': result,
+					'matched_images': matched_images,
+					'scores': scores,
 				})
 
 	else:

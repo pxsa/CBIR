@@ -1,6 +1,5 @@
 
 {% load static %}
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +28,7 @@
 		  <div class="col-sm-6 mb-3 mb-sm-0">
 			<div class="card shadow rounded border-0 p-5">
 				{% if uploaded_image %}
-					<img src="{{MEDIA_URL}}{{uploaded_image}}" class="card-img-top" alt="uploaded_image">
+					<img src="/media/{{uploaded_image}}" class="card-img-top" alt="uploaded_image">
 				{% endif %}
 		      <div class="card-body">
 		        <h5 class="card-title">Upload Image</h5>
@@ -39,7 +38,7 @@
 					<input type="file" class="form-control mb-2" id="customFile" name="image" />
 		        	<button type="submit" class="btn btn-outline-danger">بارگذاری</button>
 		        </form>
-				<p>uploaded_image {{uploaded_image}}</p>
+				<p>uploaded_image {{MEDIA_URL}}{{uploaded_image}}</p>
 				<p>path {{uploaded_image.path}}</p>
 				<p>url {{uploaded_image.url}}</p>
 		      </div>
@@ -52,7 +51,7 @@
 				<input type="hidden" name="original_image" value="{{ uploaded_image }}">
 				{% for image in matched_images%}
 					<div class="card shadow rounded border-0 mb-3">
-						<img class="card-img-top" src="/media/{{image}}" alt="Image {{ forloop.counter }}">
+						<img class="card-img-top" src="/static/{{image}}" alt="Image {{ forloop.counter }}">
 						<div class="card-body">
 							<h5 class="card-title">{{image}}</h5>
 							<input type="checkbox" name="relevant_images" value="{{ image }}"> Relevant

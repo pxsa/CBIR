@@ -38,7 +38,7 @@ class VGGModel():
     
 
     def extract_all_features(self):
-        root_path = os.path.join(settings.STATIC_ROOT, 'msrcorid')
+        root_path = os.path.join(settings.STATICFILES_DIRS[0], 'msrcorid')
         feats = []
         self.names = []
         for dirpath, _, filenames in os.walk(root_path):
@@ -52,19 +52,19 @@ class VGGModel():
 
     def make_h5f_file(self, file_name="VGG16Features.h5"):
         full_file_name = os.path.join('model', file_name)
-        file = os.path.join(settings.STATIC_ROOT, full_file_name) # TODO static path
+        file = os.path.join(settings.STATICFILES_DIRS[0], full_file_name) # TODO static path
         h5f = h5py.File(file, 'w')
         if h5f is None:
             print('NOT FOUNDED!')
-        # h5f.create_dataset('dataset_1', data=self.feats)
-        # h5f.create_dataset('dataset_2', data=np.bytes_(self.names))
+        h5f.create_dataset('dataset_1', data=self.feats)
+        h5f.create_dataset('dataset_2', data=np.bytes_(self.names))
         h5f.close()
 
     
     def read_h5f_file(self):
         file_name = "VGG16Features.h5"
         full_file_name = os.path.join('model', file_name)
-        file = os.path.join(settings.STATIC_ROOT,  full_file_name)# TODO static path
+        file = os.path.join(settings.STATICFILES_DIRS[0],  full_file_name)# TODO static path
         h5f = h5py.File(file,'r')
         self.feats = h5f['dataset_1'][:]
         self.names = h5f['dataset_2'][:]
@@ -83,8 +83,28 @@ class VGGModel():
     def match_images(self, scores, top_n=10):
         indices = np.argsort(scores)[::-1][:top_n]
         matched_images = []
-        for idx in indices:
-            matched_images.append(self.names[idx].decode('utf-8')[43:])
+        matched_images_scores = []
 
-        return matched_images
+        for idx in indices:
+            matched_images.append(self.names[idx].decode('utf-8')[42:])
+            matched_images_scores.append(scores[idx])
+        return matched_images, matched_images_scores
     
+
+    def image_process(self, image_name):
+        # image_path = "/home/parsa/code/master/image/cbir/media/" + str(image_path)
+        image_path = os.path.join(settings.MEDIA_ROOT, str(image_name))
+        
+        # extract features
+        input_img_feat = self.extract_feat(image_path)
+
+        # model
+        # IN THIS STEP THE h5f FILE MUST EXSIST.
+        self.read_h5f_file()
+
+        # Search
+        scores = self.calculate_similarity(input_img_feat)
+        matched_images, matched_images_scores = self.match_images(scores)
+        return matched_images, matched_images_scores
+        # indices = search(features, image_features)
+        # return match_images(indices, paths)
