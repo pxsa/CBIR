@@ -1,0 +1,56 @@
+{% extends '_base.html' %}
+
+
+{% block title %}
+    model
+{% endblock %}
+
+
+{% block content %}
+<div class="m-5">
+    <h2>Start creating the model.</h2>
+    <button id="startBtn" class="btn btn-primary mb-3">Start Process</button>
+    
+    <!-- Progress Bar -->
+    <div class="progress">
+        <div id="progressBar" class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+    </div>
+    
+    <!-- Status Message -->
+    <p id="statusMessage" class="mt-3"></p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#startBtn').click(function() {
+            $('#statusMessage').text('');
+            $.ajax({
+                url: '{% url "start_process" %}',
+                method: 'GET',
+                success: function() {
+                    updateProgress();
+                }
+            });
+        });
+
+        function updateProgress() {
+            let interval = setInterval(function() {
+                $.ajax({
+                    url: '{% url "get_progress" %}',
+                    method: 'GET',
+                    success: function(data) {
+                        let progress = data.progress;
+                        $('#progressBar').css('width', progress + '%').attr('aria-valuenow', progress).text(progress + '%');
+
+                        if (progress >= 100) {
+                            clearInterval(interval);
+                            $('#statusMessage').text('Process Completed!');
+                        }
+                    }
+                });
+            }, 500);
+        }
+    });
+</script>
+{% endblock %}

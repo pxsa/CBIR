@@ -1,0 +1,30 @@
+{% extends '_base.html' %}
+
+{% block title %}
+    feedback
+{% endblock %}
+
+
+{% block content %}
+    <div class="m-5">
+        <div class="row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card shadow rounded border-0 p-5">
+                    {% if uploaded_image %}
+                        <img src="/media/{{uploaded_image}}" class="card-img-top" alt="uploaded_image">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">Upload Image</h5>
+                        <form method="POST" action="{% url 'upload' %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="hidden" name="variable1" value="salam">
+                            <label class="form-label" for="customFile">Please selecet a picture.</label>
+                            <input type="file" class="form-control mb-2" id="customFile" name="image" />
+                            <button type="submit" class="btn btn-outline-danger">بارگذاری</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
