@@ -35,7 +35,6 @@ def upload_image(request):
 					'matched_images': matched_images,
 					'scores': scores,
 				})
-
 	else:
 		form = ImageUploadForm()
 		
@@ -45,17 +44,28 @@ def upload_image(request):
 def feedback(request):
 	if request.method == 'POST':
 		raw_selected_images_path = request.POST.getlist('relevant_images')
-		selected_images_path = [os.path.join(settings.MEDIA_ROOT, path) for path in raw_selected_images_path]
+		selected_images_path = [os.path.join(settings.STATICFILES_DIRS[0], path) for path in raw_selected_images_path]
 		original_image_path = os.path.join(settings.MEDIA_ROOT, request.POST['original_image'])
-		result = image_feedback_process(selected_images_path, original_image_path)
-		print('\n',result, '\n')		
+		
+		# PROCESS !!!
+
+		# Custom Model
+		# updated_images = image_feedback_process(selected_images_path, original_image_path)
+
+		# VGG Model
+		vgg = VGGModel()
+		updated_images, scores = vgg.image_feedback_process(selected_images_path, original_image_path)
+		# print(selected_images_path)
+		# print('\n',updated_images, '\n')		
+		
 		return render(request, 'home.html', context={
 			'uploaded_image': request.POST['original_image'],
-			'matched_images': result,
+			'matched_images': updated_images,
+			'scores': scores,
 		})
 
 	else:
-		return render(request, 'test_feedback.html')
+		return render(request, 'home.html')
 	
 
 def arrange_model(request):

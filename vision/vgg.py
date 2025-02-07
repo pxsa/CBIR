@@ -87,7 +87,7 @@ class VGGModel():
 
         for idx in indices:
             matched_images.append(self.names[idx].decode('utf-8')[42:])
-            matched_images_scores.append(scores[idx])
+            matched_images_scores.append(round(scores[idx], 3))
         return matched_images, matched_images_scores
     
 
@@ -106,5 +106,25 @@ class VGGModel():
         scores = self.calculate_similarity(input_img_feat)
         matched_images, matched_images_scores = self.match_images(scores)
         return matched_images, matched_images_scores
-        # indices = search(features, image_features)
-        # return match_images(indices, paths)
+    
+
+    def image_feedback_process(self, selected_images, query_image_path, alpha=1, beta=0.75):
+        # calculate a list of features of selected images
+        relevant_features = [self.extract_feat(img) for img in selected_images]
+
+        # original feature
+        original_feature = self.extract_feat(query_image_path)
+
+        # updated results
+        relevant_mean = np.mean(relevant_features, axis=0)
+        updated_query = alpha * original_feature + beta * relevant_mean
+        
+        # model
+        # IN THIS STEP THE h5f FILE MUST EXSIST.
+        self.read_h5f_file()
+
+        # compute similarities
+        scores = self.calculate_similarity(updated_query)
+        matched_images, matched_images_scores = self.match_images(scores)
+        return matched_images, matched_images_scores
+    

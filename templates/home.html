@@ -1,5 +1,7 @@
 
 {% load static %}
+{% load custom_filters %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,9 +40,6 @@
 					<input type="file" class="form-control mb-2" id="customFile" name="image" />
 		        	<button type="submit" class="btn btn-outline-danger">بارگذاری</button>
 		        </form>
-				<p>uploaded_image {{MEDIA_URL}}{{uploaded_image}}</p>
-				<p>path {{uploaded_image.path}}</p>
-				<p>url {{uploaded_image.url}}</p>
 		      </div>
 		    </div>
 		  </div>
@@ -54,7 +53,14 @@
 						<img class="card-img-top" src="/static/{{image}}" alt="Image {{ forloop.counter }}">
 						<div class="card-body">
 							<h5 class="card-title">{{image}}</h5>
-							<input type="checkbox" name="relevant_images" value="{{ image }}"> Relevant
+							<div class="row justify-content-between">
+								<div class="col-4">
+									<span>{{scores|index:forloop.counter0}}</span>
+								</div>
+								<div class="col-4">
+									<input type="checkbox" name="relevant_images" value="{{ image }}"> Relevant
+								</div>
+							  </div>
 						</div>
 					</div>
 				{% endfor %}
