@@ -50,21 +50,24 @@ def feedback(request):
 	
 
 def arrange_model(request):
-	# vgg = VGGModel()
-	# vgg.extract_all_features()
-	# vgg.make_h5f_file()
-
 	return render(request, 'vision/arrange_model.html')
 
 
-def start_process(request):
-    # Simulate a long-running process
-    for i in range(1, 101):
-        request.session['progress'] = i  # Store progress in session
-        time.sleep(1)  # Simulate time-consuming task
-    
-    return JsonResponse({'message': 'Process completed!'})
 
+
+
+def start_process(request):
+    # # Simulate a long-running process
+    # for i in range(1, 101):
+    #     request.session['progress'] = i  # Store progress in session
+    #     time.sleep(1)  # Simulate time-consuming task
+    # return JsonResponse({'message': 'Process completed!'})
+	
+	vgg = VGGModel()
+	vgg.extract_all_features()
+	vgg.make_h5f_file()
+	return render(request, 'vision/arrange_model.html', context={'status':'Process completed!'})
+    
 
 def get_progress(request):
     progress = request.session.get('progress', 0)

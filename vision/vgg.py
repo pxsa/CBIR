@@ -18,8 +18,10 @@ class VGGModel():
         self.input_shape = (224, 224, 3)
         self.weight = 'imagenet'
         self.pooling = 'max'
-        self.model = VGG16(weights = self.weight, input_shape = (self.input_shape[0], self.input_shape[1], self.input_shape[2]), pooling = self.pooling, include_top = False)
-        self.model.predict(np.zeros((1, 224, 224 )))
+        self.model = VGG16(weights=self.weight, input_shape=self.input_shape, pooling=self.pooling, include_top=False)
+
+        # Corrected input shape to include the channel dimension
+        self.model.predict(np.zeros((1, 224, 224, 3)))
 
     '''
     Use vgg16 model to extract features
@@ -49,15 +51,20 @@ class VGGModel():
 
 
     def make_h5f_file(self, file_name="VGG16Features.h5"):
-        file = os.path.join(settings.STATIC_URL, file_name) # TODO static path
+        full_file_name = os.path.join('model', file_name)
+        file = os.path.join(settings.STATIC_ROOT, full_file_name) # TODO static path
         h5f = h5py.File(file, 'w')
-        h5f.create_dataset('dataset_1', data=self.feats)
-        h5f.create_dataset('dataset_2', data=np.bytes_(self.names))
+        if h5f is None:
+            print('NOT FOUNDED!')
+        # h5f.create_dataset('dataset_1', data=self.feats)
+        # h5f.create_dataset('dataset_2', data=np.bytes_(self.names))
         h5f.close()
 
     
     def read_h5f_file(self):
-        file = os.path.join(settings.STATIC_URL, "VGG16Features.h5") # TODO static path
+        file_name = "VGG16Features.h5"
+        full_file_name = os.path.join('model', file_name)
+        file = os.path.join(settings.STATIC_ROOT,  full_file_name)# TODO static path
         h5f = h5py.File(file,'r')
         self.feats = h5f['dataset_1'][:]
         self.names = h5f['dataset_2'][:]
