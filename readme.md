@@ -22,6 +22,7 @@ Content-Based Image Retrieval (CBIR) is a technique for searching and retrieving
 
 ## Preview
 
+![](./static/preview.gif)
 
 ## Todo
 
