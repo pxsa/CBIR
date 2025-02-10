@@ -16,6 +16,7 @@ Content-Based Image Retrieval (CBIR) is a technique for searching and retrieving
     - [Normalization](#normalize)
     - [Combine](#combine-features)
 - [Relevance Feedback](#relevance-feedback)
+- [VGG Modle](#vgg-model)
 - [Django](#django)
 
 
@@ -74,6 +75,10 @@ Fuse different features into a single vector if needed.
 ## Relevance Feedback
 
 in CBIR is an interactive process where users mark retrieved images as relevant or not. The system then updates and refines search results based on this feedback, improving accuracy in finding similar images.
+
+## VGG Model
+
+The **VGG model** is a type of deep learning network used for image recognition. It uses many small 3x3 filters stacked on top of each other to find patterns in images. The most common versions are **VGG16** and **VGG19**, with 16 and 19 layers. It’s popular because it works well for tasks like classifying and comparing images.
 
 ## Django
 
