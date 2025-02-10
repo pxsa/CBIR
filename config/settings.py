@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # Custom Apps
     'vision.apps.VisionConfig',
+    'editor.apps.EditorConfig',
 ]
 
 MIDDLEWARE = [
